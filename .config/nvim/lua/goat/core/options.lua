@@ -3,6 +3,8 @@ vim.cmd([[autocmd BufEnter * set formatoptions-=cro]])
 local opt = vim.opt
 
 vim.cmd("set nu")
+vim.cmd("set ignorecase")
+vim.cmd("set smartcase")
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
