@@ -50,7 +50,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.lsp.config["basedpyright"] = {
-  cmd = { "basedpyright" },
+  cmd = { "pyright-langserver", "--stdio" },
   filetypes = { "python" },
 }
 vim.lsp.enable("basedpyright")
