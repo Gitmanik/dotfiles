@@ -25,8 +25,7 @@ return {
           },
         },
       },
-      view = {
-        relativenumber = true,
+      view = { 
         adaptive_size = true,
         side = "right",
       },
