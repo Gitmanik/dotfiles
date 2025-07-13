@@ -1,6 +1,9 @@
 [window]
 decorations = "buttonless"
 
+[font]
+size = 11
+
 [font.bold]
 family = "JetBrainsMono Nerd Font"
 style = "Heavy"
