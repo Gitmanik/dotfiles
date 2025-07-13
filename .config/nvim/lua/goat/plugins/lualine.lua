@@ -4,6 +4,15 @@
 -- Custom status line
 --
 
+local function get_last_segment(path)
+    local segments = {}
+    for segment in string.gmatch(path, "[^/]+") do
+        table.insert(segments, segment)
+    end
+    return segments[#segments]
+end
+
+
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -18,17 +27,22 @@ return {
 				return ""
 			end
 
-            local sol = ""
-            if not vim.g.roslyn_nvim_selected_solution == nil then
-                sol = vim.g.roslyn_nvim_selected_solution
-            end
-
-			local c = {}
+            local c = {}
 			for _, client in pairs(clients) do
 				table.insert(c, client.name)
 			end
-			return " " .. table.concat(c, "|") .. vim.g.roslyn_nvim_selected_solution
+			return " " .. table.concat(c, "|")
 		end
+    
+        local current_sol = function()
+            
+            local sol = ""
+            if not (vim.g.roslyn_nvim_selected_solution == nil or vim.g.roslyn_nvim_selected_solution == '') then
+                sol = get_last_segment(vim.g.roslyn_nvim_selected_solution)
+            end
+            return sol
+        end
+
         require("lualine").setup({
 			sections = {
 				lualine_a = {
@@ -59,7 +73,7 @@ return {
 						update_in_insert = true,
 					},
 				},
-				lualine_y = { clients_lsp },
+				lualine_y = { clients_lsp, current_sol },
 				lualine_z = {
 					{ "location" },
 				},
