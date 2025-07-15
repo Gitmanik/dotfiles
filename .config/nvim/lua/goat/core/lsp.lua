@@ -69,3 +69,10 @@ vim.lsp.config("roslyn", {
 
 vim.lsp.enable("roslyn")
 
+vim.lsp.config["robotframework"] = {
+    cmd = { 'robotframework_ls' },
+    filetypes = { 'robot' },
+    root_markers = { 'robotidy.toml', 'robot.yaml', '.git' },
+}
+vim.lsp.enable("robotframework")
+

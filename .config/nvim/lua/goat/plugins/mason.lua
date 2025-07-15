@@ -17,6 +17,9 @@ return {
 
             -- C#
             "roslyn",
-		},
+ 
+            -- Robot Framework
+            "robotframework-lsp",
+        },
     }
 }
