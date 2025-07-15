@@ -44,9 +44,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     opts.desc = "Show documentation for what is under cursor"
     vim.keymap.set("i", "<C-k>", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
-    opts.desc = "Restart LSP"
-    vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
-  end,
+    vim.diagnostic.config({ virtual_lines = { current_line = true } })
+end,
 })
 
 vim.lsp.config["basedpyright"] = {
