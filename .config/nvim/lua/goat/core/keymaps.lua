@@ -24,6 +24,9 @@ map("v", "K", ":m '>-2<CR>gv=gv", { desc = "Move selected up" })
 map("i", "<C-b>", "<ESC>^i", { desc = "move beginning of line" })
 map("i", "<C-e>", "<End>", { desc = "move end of line" })
 
+map("n", "<Tab>","<cmd>BufferLineCycleNext<CR>", {desc = "jump to next buffer" })
+map("n", "<S-Tab>","<cmd>BufferLineCyclePrev<CR>", {desc = "jump to prev buffer" })
+
 -- Open lazygit in new tmux window
 vim.keymap.set(
   "n",
