@@ -2,7 +2,7 @@ vim.cmd([[autocmd BufEnter * set formatoptions-=cro]])
 
 local opt = vim.opt
 
-vim.cmd("set nu")
+vim.cmd("set nu rnu")
 vim.cmd("set ignorecase")
 vim.cmd("set smartcase")
 
