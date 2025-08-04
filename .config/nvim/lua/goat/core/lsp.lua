@@ -49,7 +49,7 @@ end,
 })
 
 vim.lsp.config["basedpyright"] = {
-  cmd = { "pyright-langserver", "--stdio" },
+  cmd = { "basedpyright-langserver", "--stdio" },
   filetypes = { "python" },
 }
 vim.lsp.enable("basedpyright")
