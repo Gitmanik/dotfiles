@@ -45,7 +45,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("i", "<C-k>", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
     vim.diagnostic.config({ virtual_lines = { current_line = true } })
+
 end,
+})
+
+vim.lsp.config("*", {
+    on_attach = function(client, bufnr)
+        if client.server_capabilities.documentSymbolProvider then
+            require("nvim-navic").attach(client, bufnr)
+        end
+    end,
 })
 
 vim.lsp.config["basedpyright"] = {
@@ -73,4 +82,3 @@ vim.lsp.config["phpactor"] =  {
     -- workspace_required = true,
 }
 vim.lsp.enable("phpactor")
-

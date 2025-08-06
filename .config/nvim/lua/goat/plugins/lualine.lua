@@ -55,11 +55,16 @@ return {
 						padding = { left = 1, right = 0 },
 					},
 					"filename",
+                    {
+                        "navic",
+                        color_correction = "dynamic"
+                    },
 				},
 				lualine_c = {
 					{
 						"branch"
 					},
+
 					{
 						"diff",
 						symbols = { added = " ", modified = " ", removed = " " },
