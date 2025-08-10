@@ -57,28 +57,10 @@ vim.lsp.config("*", {
     end,
 })
 
-vim.lsp.config["basedpyright"] = {
-  cmd = { "basedpyright-langserver", "--stdio" },
-  filetypes = { "python" },
-}
 vim.lsp.enable("basedpyright")
-
 vim.lsp.config("roslyn", {
     filetypes = { "cs" },
 })
 vim.lsp.enable("roslyn")
-
-vim.lsp.config["robotframework"] = {
-    cmd = { 'robotframework_ls' },
-    filetypes = { 'robot' },
-    root_markers = { 'robotidy.toml', 'robot.yaml', '.git' },
-}
 vim.lsp.enable("robotframework")
-
-vim.lsp.config["phpactor"] =  {
-    cmd = { "phpactor", "language-server" },
-    filetypes = { "php" },
-    root_markers = { ".git", "composer.json", ".phpactor.json", ".phpactor.yml" },
-    -- workspace_required = true,
-}
 vim.lsp.enable("phpactor")
