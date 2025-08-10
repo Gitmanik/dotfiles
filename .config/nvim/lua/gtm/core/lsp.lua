@@ -57,10 +57,13 @@ vim.lsp.config("*", {
     end,
 })
 
-vim.lsp.enable("basedpyright")
+
 vim.lsp.config("roslyn", {
     filetypes = { "cs" },
 })
 vim.lsp.enable("roslyn")
+
 vim.lsp.enable("robotframework")
+vim.lsp.enable("basedpyright")
 vim.lsp.enable("phpactor")
+vim.lsp.enable("clangd")

@@ -1,4 +1,4 @@
-require("goat.core")
-require("goat.lazy")
+require("gtm.core")
+require("gtm.lazy")
 
 require("bufferline").setup{}
