@@ -26,8 +26,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     opts.desc = "Smart rename"
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
 
-    -- opts.desc = "Show buffer diagnostics"
-    -- vim.keymap.set("n", "<leader>D", "<cmd>FzfLua diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
+    opts.desc = "Show buffer diagnostics"
+    vim.keymap.set("n", "<leader>D", "<cmd>FzfLua diagnostics_document<CR>", opts) -- show  diagnostics for file
 
     opts.desc = "Show line diagnostics"
     vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
@@ -57,8 +57,79 @@ vim.lsp.config("*", {
     end,
 })
 
+-- Copied from lspconfig/roslyn_ls
+
+local function on_init_sln(client, target)
+  vim.notify('Initializing: ' .. target, vim.log.levels.INFO, { title = 'roslyn_ls' })
+  ---@diagnostic disable-next-line: param-type-mismatch
+  client:notify('solution/open', {
+    solution = vim.uri_from_fname(target),
+  })
+end
+
+---@param client vim.lsp.Client
+---@param project_files string[]
+local function on_init_project(client, project_files)
+  vim.notify('Initializing: projects', vim.log.levels.INFO, { title = 'roslyn_ls' })
+  ---@diagnostic disable-next-line: param-type-mismatch
+  client:notify('project/open', {
+    projects = vim.tbl_map(function(file)
+      return vim.uri_from_fname(file)
+    end, project_files),
+  })
+end
+
+vim.lsp.config["roslyn_ls"] = {
+    on_init = {
+      function(client)
+        local root_dir = client.config.root_dir
+        local preferred_sln = "Renode_NET.sln"
+        local preferred_sln_path = nil
+
+        -- First pass: look for Renode_NET.sln
+        for entry, type in vim.fs.dir(root_dir) do
+          if type == "file" and entry == preferred_sln then
+            preferred_sln_path = vim.fs.joinpath(root_dir, entry)
+            break
+          end
+        end
+
+        if preferred_sln_path then
+          on_init_sln(client, preferred_sln_path)
+          return
+        end
+
+        -- Second pass: fall back to first solution
+        for entry, type in vim.fs.dir(root_dir) do
+          if type == "file" and vim.endswith(entry, ".sln") then
+            on_init_sln(client, vim.fs.joinpath(root_dir, entry))
+            return
+          end
+        end
+
+        -- If no solution is found, load first project
+        for entry, type in vim.fs.dir(root_dir) do
+          if type == "file" and vim.endswith(entry, ".csproj") then
+            on_init_project(client, { vim.fs.joinpath(root_dir, entry) })
+          end
+        end
+      end,
+    },
+
+    cmd = {
+        'roslyn',
+        '--logLevel',
+        'Information',
+        '--extensionLogDirectory',
+        vim.fs.joinpath(vim.fn.stdpath("state"), 'roslyn_ls/logs'),
+        '--stdio', 
+    }
+}
+
+--
+
 vim.lsp.enable("roslyn_ls")
-vim.lsp.enable("robotframework")
+vim.lsp.enable("robotframework_ls")
 vim.lsp.enable("basedpyright")
 vim.lsp.enable("phpactor")
 vim.lsp.enable("clangd")
