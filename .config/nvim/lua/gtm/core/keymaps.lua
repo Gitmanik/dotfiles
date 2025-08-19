@@ -27,6 +27,9 @@ map("i", "<C-e>", "<End>", { desc = "move end of line" })
 map("n", "<Tab>","<cmd>BufferLineCycleNext<CR>", {desc = "jump to next buffer" })
 map("n", "<S-Tab>","<cmd>BufferLineCyclePrev<CR>", {desc = "jump to prev buffer" })
 
+map("n", "<C-n>", "<cmd>Neotree position=float toggle=true reveal=true<CR>", { desc = "Toggle file explorer" }) -- toggle file explorer
+
+
 -- Open lazygit in new tmux window
 vim.keymap.set(
   "n",
