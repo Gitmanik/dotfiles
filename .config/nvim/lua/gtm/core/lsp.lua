@@ -133,3 +133,5 @@ vim.lsp.enable("robotframework_ls")
 vim.lsp.enable("basedpyright")
 vim.lsp.enable("phpactor")
 vim.lsp.enable("clangd")
+vim.lsp.enable("texlab")
+
