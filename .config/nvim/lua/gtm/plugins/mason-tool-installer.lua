@@ -17,6 +17,10 @@ return {
 
             -- PHP
             "phpactor",
+
+            -- LaTeX
+            "tree-sitter-cli",
+            "texlab",
         },
     }
 }
