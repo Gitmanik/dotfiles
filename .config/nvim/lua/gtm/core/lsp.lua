@@ -44,7 +44,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     opts.desc = "Show documentation for what is under cursor"
     vim.keymap.set("i", "<C-k>", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
-    vim.diagnostic.config({ virtual_lines = { current_line = true } })
+    vim.diagnostic.config({ virtual_lines = { 
+            current_line = true,
+        },
+        underline = false,
+    })
 
 end,
 })
