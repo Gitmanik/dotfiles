@@ -7,3 +7,9 @@ git:
   paging:
     colorArg: always
     pager: delta --dark --paging=never --diff-so-fancy
+
+customCommands:
+  - key: 'F'
+    context: 'files'
+    command: 'git-absorb'
+    description: 'Absorb staged files'
