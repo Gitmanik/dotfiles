@@ -9,9 +9,6 @@ return {
 			-- C/C++
 			"clangd",
 
-            -- C#
-            "roslyn",
-
             -- Robot Framework
             "robotframework-lsp",
 
