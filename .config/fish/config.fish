@@ -13,6 +13,7 @@ if status is-interactive
     alias l.="eza -a | grep -E '^\.'"
 
     alias clip="xsel --clipboard"
+    abbr -a fish-reload-config 'source ~/.config/fish/**/*.fish'
 
     set -gx EDITOR nvim
 
