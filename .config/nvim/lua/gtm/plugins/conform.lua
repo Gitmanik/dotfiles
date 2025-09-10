@@ -5,30 +5,18 @@ return {
 
     conform.setup({
       formatters_by_ft = {
-        -- lua = { "stylua" },
-        -- python = { "isort", "black" },
-        -- markdown = { "prettierd" },
-        -- yaml = { "prettierd" },
-        -- robot = {"robotidy" }
-        cs = { "csharpier" }
       },
 
       format_on_save = function(bufnr)
         -- Enable autoformat on certain filetypes
-        local format_filetypes = { "cs", "robot", "python" }
+        local format_filetypes = { "cs", "python" }
         if not vim.tbl_contains(format_filetypes, vim.bo[bufnr].filetype) then
           return
         end
 
-        return { timeout_ms = 500, lsp_format = "fallback" }
+        return { timeout_ms = 500, lsp_format = "prefer" }
       end,
     })
-
-    conform.formatters.robot = {
-        inherit = false,
-        command = "robotidy",
-        args = { "format", "--config", config_file, "$FILENAME" },
-    }
 
     -- keymaps
 
