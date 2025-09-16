@@ -1,0 +1,84 @@
+#! /usr/bin/env bash
+
+# Arranges windows on the workspace
+
+SCREEN_W=3440
+SCREEN_H=1440
+
+MARGIN=32
+
+WINDOW_W=1200
+WINDOW_H=1184
+
+_floating=0
+
+help() {
+  cat <<EOF
+  TBA
+EOF
+}
+
+getArgs() {
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+    -h | --help)
+      help
+      exit 0
+      ;;
+    -f)
+      _floating=1
+      ;;
+    *)
+      help
+      echo ""
+      echo "Wrong argument given"
+      exit 1
+      ;;
+    esac
+    shift
+  done
+}
+
+floating() {
+  client_idx=0
+  for client in $CLIENTS
+  do
+    X=$MARGIN
+    Y=$MARGIN
+    if ((CLIENTS_N>1))
+    then
+      X=$((MARGIN+(client_idx*(SCREEN_W-WINDOW_W-2*MARGIN))/(CLIENTS_N-1)))
+      Y=$((MARGIN+(client_idx*(SCREEN_H-WINDOW_H-2*MARGIN))/(CLIENTS_N-1)))
+    fi
+    CX=$((X+(WINDOW_W/2)))
+    CY=$((Y+(WINDOW_H/2)))
+    hyprctl dispatch setfloating "address:${client}" > /dev/null
+    hyprctl dispatch resizewindowpixel exact $WINDOW_W $WINDOW_H, "address:${client}" > /dev/null
+    hyprctl dispatch movewindowpixel exact $X $Y, "address:${client}" > /dev/null
+    hyprctl dispatch movefocus "address:${client}" > /dev/null
+    hyprctl dispatch bringactivetotop > /dev/null
+    hyprctl dispatch movecursor $CX $CY > /dev/null
+    client_idx=$((client_idx+1))
+  done
+}
+
+tiled() {
+  for CLIENT in $CLIENTS
+  do
+    hyprctl dispatch settiled "address:${CLIENT}" > /dev/null
+  done
+}
+
+getArgs "$@"
+ACTIVE_WORKSPACE=$(hyprctl activewindow -j | jq -r '.workspace.id')
+ACTIVE_CLIENT=$(hyprctl activewindow -j | jq -r ".address")
+CLIENTS=$(hyprctl clients -j | jq -r ".[] | select((.workspace.id == ${ACTIVE_WORKSPACE}) and (.address != \"${ACTIVE_CLIENT}\")) | .address")
+CLIENTS="${CLIENTS}"$'\n'"${ACTIVE_CLIENT}"
+CLIENTS_N=$(wc -w <<< "${CLIENTS}")
+
+if [ $_floating -ne 0 ]
+then
+  floating
+else
+  tiled
+fi

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Downloads player art and returns its path
+
+playerctl metadata -F mpris:artUrl | while read -r art_url; do
+  art_name=$(basename "${art_url}")
+  art_path="${HOME}/.cache/eww/art/${art_name}"
+
+  if [ ! -f "${art_path}" ]; then
+    if [[ "${art_url}" == "file://"* ]]; then
+      cp "${art_url:7}" "${art_path}"
+    else
+      wget -q -O "${art_path}" "${art_url}"
+    fi
+  fi
+
+  printf "%s\n" "${art_path}"
+done

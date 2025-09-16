@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Creates simple weather description using wttr.in
+
+weather_format="%l+%c+%C+%t+%h+%w+%p+%P+UV%u+%S-%s+%m"
+cache_file="${HOME}/.cache/wttr_cache"
+
+if [ ! -f "${cache_file}" ]; then
+  touch "${cache_file}"
+fi
+
+last_modified=$(stat -c %Y "${cache_file}")
+current_date=$(date +%s)
+time_diff=$((current_date - last_modified))
+expiry_time=3600
+cached_data=$(<"${cache_file}")
+
+# Use cached
+if [ "${time_diff}" -lt "${expiry_time}" ] && [ -n "${cached_data}" ]; then
+  echo "${cached_data}"
+  exit
+fi
+
+# Get new
+response=$(curl "wttr.in/Gdansk?format=${weather_format}" 2>/dev/null)
+echo "${response}" >"${cache_file}"

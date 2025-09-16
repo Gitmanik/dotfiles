@@ -1,0 +1,111 @@
+@import "colors";
+
+* {
+  all: unset;
+}
+
+window {
+  font-family: SourceCodePro;
+}
+
+.main-box {
+  background-color: $color_base;
+}
+
+.workspace-entry {
+  font-family: PoiretOne;
+  font-size: 12px;
+  color: $color_white;
+
+  &.occupied {
+    color: $color_white;
+  }
+  &.occupied_diff_disp {
+    color: $color_white;
+  }
+  &.current {
+    color: $color_sapphire;
+  }
+  &.special {
+    color: $color_lavender;
+  }
+}
+
+.time {
+  font-size: 24px;
+}
+
+.clock {
+  font-size: 224px;
+}
+
+.metric {
+  padding: 4px;
+
+  progressbar {
+    outline-offset: 0px;
+    outline-width: 0px;
+    background-color: $color_surface0;
+    trough {
+      min-width: 28px;
+      min-height: 8px;
+      progress {
+        background-color: $color_white;
+        min-height: 8px;
+      }
+    }
+  }
+  progressbar.inactive trough progress {
+    background-color: $color_overlay0;
+  }
+
+  .metric-text {
+    font-size: 12px;
+  }
+
+  .metric-icon {
+    font-size: 12px;
+  }
+}
+
+.player {
+  padding: 4px;
+
+  progressbar {
+    background-color: $color_surface0;
+    trough {
+      min-width: 28px;
+      min-height: 8px;
+      progress {
+        background-color: $color_white;
+        min-height: 8px;
+      }
+    }
+  }
+  progressbar.inactive trough progress {
+    background-color: $color_surface0;
+  }
+}
+
+.metric-cpu,
+.metric-gpu {
+  progressbar trough {
+    min-height: 4px;
+    progress {
+      min-height: 4px;
+    }
+  }
+}
+
+tooltip,
+.tooltip {
+  color: $color_white;
+  background-color: $color_base;
+  border-radius: 4px;
+  text-shadow: none;
+}
+
+calendar:selected {
+  color: $color_lavender;
+  font-weight: bold;
+}

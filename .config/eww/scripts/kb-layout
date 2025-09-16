@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Retrieves keyboard layout
+
+keyboard="obins-anne-pro-2-c18-(qmk)"
+
+layout (){
+  hyprctl devices -j | jq ".keyboards | .[] | select(.name == \"${keyboard}\") | .active_keymap"
+}
+
+layout
+socat -u "UNIX-CONNECT:${XDG_RUNTIME_DIR}/hypr/${HYPRLAND_INSTANCE_SIGNATURE}/.socket2.sock" - | while read -r _; do
+  layout
+done

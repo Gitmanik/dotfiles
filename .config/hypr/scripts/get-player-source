@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Retrieves player source
+
+trackid=$(playerctl metadata mpris:trackid)
+if [[ "$trackid" == *"firefox"* ]]; then
+  echo -e "Firefox 󰈹"
+elif [[ "$trackid" == *"spotify"* ]]; then
+  echo -e "Spotify "
+elif [[ "$trackid" == *"chromium"* ]]; then
+  echo -e "Chrome "
+else
+  echo ""
+fi

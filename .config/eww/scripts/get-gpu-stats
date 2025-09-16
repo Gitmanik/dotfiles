@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Retrieves GPU statistics using nvidia-smi
+
+gpustats (){
+  nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total,temperature.gpu \
+    --format=csv,noheader,nounits | \
+    xargs -I {} printf "[{}]\n" | \
+    paste -sd "," - | \
+    xargs -I {} printf "[{}]" | \
+    jq -c '[.[] | {"usage": .[0], "memory_used": .[1], "memory_total": .[2], "temp": .[3]}]'
+  printf "\n"
+}
+
+while true; do
+  gpustats
+  sleep 2
+done;

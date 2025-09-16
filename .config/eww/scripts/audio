@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Retrieves audio volume or mute state
+
+case "$1" in
+  "volume")
+    pamixer --get-volume;
+    pactl subscribe \
+      | grep --line-buffered "Event 'change' on sink " \
+      | while read -r _;
+      do pamixer --get-volume | cut -d " " -f1;
+    done
+    ;;
+  "mute")
+    pamixer --get-mute;
+    pactl subscribe \
+      | grep --line-buffered "Event 'change' on sink " \
+      | while read -r _;
+      do pamixer --get-mute | cut -d " " -f1;
+    done
+    ;;
+esac

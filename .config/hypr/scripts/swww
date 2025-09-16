@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Changes wallapaper every 1h using images from selected directory
+
+# Set the path to the wallpapers directory
+wallpapers_dir="${HOME}/.config/hypr/wallpapers/"
+
+# Get a list of all image files in the wallpapers directory
+wallpapers=("${wallpapers_dir}"/*)
+
+# Start an infinite loop
+while true; do
+  # Check if the wallpapers array is empty
+  if [ ${#wallpapers[@]} -eq 0 ]; then
+    # If the array is empty, refill it with the image files
+    wallpapers=("${wallpapers_dir}"/*)
+  fi
+
+  # Select a random wallpaper from the array
+  wallpaper_index=$(( RANDOM % ${#wallpapers[@]} ))
+  selected_wallpaper="${wallpapers[$wallpaper_index]}"
+
+  # Update the wallpaper using the swww img command
+  swww img "${selected_wallpaper}"
+
+  # Remove the selected wallpaper from the array
+  unset "wallpapers[${wallpaper_index}]"
+
+  wallpapers=("${wallpapers[@]}")
+
+  # Delay for 1 hours before selecting the next wallpaper
+  sleep 1h
+done
