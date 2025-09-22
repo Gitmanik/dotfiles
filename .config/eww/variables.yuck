@@ -1,6 +1,5 @@
 (defvar DISKS '["/"]')
 (defvar NETIF 'enp34s0')
-(defvar KEYBOARD 'obins-anne-pro-2-c18-(qmk)')
 
 (defvar icon_workspace_active "●")
 (defvar icon_workspace_occupied "○")

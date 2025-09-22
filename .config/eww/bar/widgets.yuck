@@ -11,30 +11,6 @@
         :value "${core.usage}"
         :width 28
         :orientation "h"))))
-;;
-;; (defwidget metric-gpu []
-;;   (box :class "metric metric-gpu"
-;;        :orientation "v"
-;;        :space-evenly false
-;;        :valign "fill"
-;;        :vexpand false
-;;     (for gpu in "${gpu_stats}"
-;;       (box
-;;            :orientation "v"
-;;            :space-evenly false
-;;            :valign "fill"
-;;            :vexpand false
-;;         (label :class "metric-icon"
-;;                :text "GPU")
-;;         (progress
-;;           :value "${gpu.usage}"
-;;           :width 28
-;;           :orientation "h"
-;;         )
-;;         (progress
-;;           :value "${(100 * gpu.memory_used)/gpu.memory_total}"
-;;           :width 28
-;;           :orientation "h")))))
 
 (defwidget metric-ram []
   (box :class "metric metric-ram"
@@ -91,46 +67,12 @@
          :valign "fill"
          :vexpand false
       (label :class "metric-icon"
-             :text "")
+             :text "VOL")
       (progress
              :class "${volume_mute ? "inactive" : ""}"
              :orientation "h"
              :width 28
              :value "${volume}"))))
-
-(defwidget player []
-  (tooltip
-    (box :class "player tooltip"
-         :orientation "v"
-         :space-evenly false
-         :valign "fill"
-         :vexpand false
-      (image :path "${player_art}"
-             :image-width 128
-             :image-height 128)
-      (label :text "${player_metadata.title}")
-      (label :text "${player_metadata.album}")
-      (progress :class "${player_metadata.status == "Playing" ? "" : "inactive"}"
-                :value "${100*player_metadata.progress}"
-                :width 128
-                :orientation "h")
-      (label :text "${player_metadata.time}"))
-    (box :class "player"
-         :orientation "v"
-         :space-evenly false
-         :valign "fill"
-         :vexpand false
-      (image :path "${player_art}"
-             :image-width 28
-             :image-height 28)
-      (progress :class "${player_metadata.status == "Playing" ? "" : "inactive"}"
-                :value "${100*player_metadata.progress}"
-                :width 28
-                :orientation "h"))))
-
-(defwidget kb-layout []
-  (eventbox :onclick "hyprctl switchxkblayout \"${KEYBOARD}\" next"
-    (label :text "${kb_layout == "\"Polish\"" ? "PL" : "EN"}")))
 
 (defwidget date []
   (tooltip :halign "center"
