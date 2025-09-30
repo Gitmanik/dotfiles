@@ -60,7 +60,7 @@
     hour min sec))
 
 (defwidget volume []
-  (eventbox :onclick "hyprctl dispatch exec [floating] pavucontrol"
+  (eventbox :onscroll "if [ '{}' == 'up' ]; then wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+; else wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; fi" :onclick "hyprctl dispatch exec [floating] pavucontrol"
     (box :class "metric metric-volume"
          :orientation "v"
          :space-evenly false
