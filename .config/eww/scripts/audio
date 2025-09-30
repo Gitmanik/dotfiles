@@ -1,22 +1,29 @@
 #!/usr/bin/env bash
 
-# Retrieves audio volume or mute state
+get_volume() {
+  pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | head -1 | tr -d '%'
+}
+
+get_mute() {
+  pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}' | grep -q yes && echo 1 || echo 0
+}
 
 case "$1" in
   "volume")
-    pamixer --get-volume;
+    get_volume
     pactl subscribe \
       | grep --line-buffered "Event 'change' on sink " \
-      | while read -r _;
-      do pamixer --get-volume | cut -d " " -f1;
-    done
+      | while read -r _; do
+          get_volume
+        done
     ;;
   "mute")
-    pamixer --get-mute;
+    get_mute
     pactl subscribe \
       | grep --line-buffered "Event 'change' on sink " \
-      | while read -r _;
-      do pamixer --get-mute | cut -d " " -f1;
-    done
+      | while read -r _; do
+          get_mute
+        done
     ;;
 esac
+
