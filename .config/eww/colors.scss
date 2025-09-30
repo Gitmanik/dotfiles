@@ -24,12 +24,14 @@ $color_overlay1: #7f849c;
 $color_overlay0: #6c7086;
 $color_surface2: #585b70;
 $color_surface1: #45475a;
-$color_surface0: #313244;
-$color_base: #0d1117; /*#1e1e2e;*/
+$color_base: #080b05;
+$color_surface0: #111509;
 $color_mantle: #181825;
 $color_crust: #11111b;
 
-$color_background: $color-base;
+$color_gitman: #a1b56c;
+
+$color_background: $color_base;
 $color_foreground: $color-text;
 
 $color_cursor: $color-lavender;
