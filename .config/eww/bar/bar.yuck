@@ -35,8 +35,4 @@
 
     (box :visible "${screen == 0 || screens == 1}" (metric-disk))
 
-    (box :visible "${screen == 0 || screens == 1}" (metric-net))
-
-    ;; (kb-layout)
-
     (date)))

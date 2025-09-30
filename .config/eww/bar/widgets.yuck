@@ -41,19 +41,6 @@
         :orientation "h"
         :tooltip "${disk} - ${round(EWW_DISK[disk].used / 1024 / 1024 / 1024, 0)} / ${round(EWW_DISK[disk].total / 1024 / 1024 / 1024, 0)} GB"))))
 
-(defwidget metric-net []
-  (eventbox :onclick "hyprctl dispatch exec [floating] nm-connection-editor"
-    (box :class "metric metric-net"
-         :orientation "v"
-         :space-evenly false
-         :valign "fill"
-         :vexpand false
-      (label :class "metric-icon"
-             :text "NET")
-      (label :class "metric-text"
-             :text "${(EWW_NET[NETIF].NET_UP > 0) ? ((EWW_NET[NETIF].NET_DOWN > 0) ? "↕" : "↑") : ((EWW_NET[NETIF].NET_DOWN > 0) ? "↓" : "-")}"
-             :tooltip "↑ ${EWW_NET[NETIF].NET_UP} ↓ ${EWW_NET[NETIF].NET_DOWN}"))))
-
 (defwidget time []
   (box :orientation "v"
        :class "time"

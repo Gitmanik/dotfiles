@@ -1,5 +1,4 @@
 (defvar DISKS '["/"]')
-(defvar NETIF 'enp34s0')
 
 (defvar icon_workspace_active "●")
 (defvar icon_workspace_occupied "○")
