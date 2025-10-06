@@ -37,7 +37,7 @@ vim.keymap.set(
   "<leader>lg",
   '<cmd>silent !tmux set -w popup-border-lines rounded; tmux popup -E -eTERM=screen-256color -xC -yC -w90\\% -h90\\% -d "'
     .. vim.fn.getcwd()
-    .. '" lazygit --debug<cr>',
+    .. '" lazygit<cr>',
   { desc = "Lazygit" }
 )
 
