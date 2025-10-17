@@ -5,6 +5,7 @@
 	required = true
 [user]
 	name = Pawel Reich
+
 [core]
     pager = delta
 
@@ -14,6 +15,9 @@
 [delta]
     navigate = true  # use n and N to move between diff sections
     dark = true      # or light = true, or omit for auto-detection
-#    light = true
+
 [merge]
     conflictstyle = zdiff3
+
+[absorb]
+    maxStack=50
