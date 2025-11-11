@@ -12,6 +12,9 @@
 [absorb]
     maxStack=50
 
+[rerere]
+    enabled = true
+    autoupdate = true
 
 [difftool]
     prompt = false
