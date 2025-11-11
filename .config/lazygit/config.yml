@@ -4,10 +4,8 @@ git:
   commitPrefix:
     - pattern: "^(\\d+)-.*$"
       replace: "[#$1] "
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never --diff-so-fancy
-
+  pagers:
+    - externalDiffCommand: difft --display=inline --color=always
 customCommands:
   - key: 'F'
     context: 'files'
