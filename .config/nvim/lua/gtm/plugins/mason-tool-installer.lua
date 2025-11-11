@@ -18,7 +18,6 @@ return {
             -- LaTeX
             "tree-sitter-cli",
             "texlab",
-            "tectonic",
         },
     }
 }
