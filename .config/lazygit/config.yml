@@ -6,6 +6,7 @@ git:
       replace: "[#$1] "
   pagers:
     - externalDiffCommand: difft --display=inline --color=always
+    - pager: delta --dark --paging=never --diff-so-fancy
 customCommands:
   - key: 'F'
     context: 'files'
