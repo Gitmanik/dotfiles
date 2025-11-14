@@ -77,4 +77,4 @@
       (for workspace in workspaces
         (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
           (box :class "workspace-entry ${workspace.id == current_workspace[screen] ? "current" : ""} ${workspace.windows > 0 ? (workspace.display == screen ? "occupied" : "occupied_diff_disp") : "empty"}"
-            (label :text "${workspace.id == current_workspace[screen] ? icon_workspace_active : workspace.windows > 0 ? (workspace.display == screen ? icon_workspace_occupied : icon_workspace_occupied_diff_disp) : icon_workspace_empty}")))))))
+            (label :text "${workspace.id == current_workspace[screen] ? icon_workspace_active : workspace.id == current_workspace[1] ? icon_workspace_active : workspace.windows > 0 ? (workspace.display == screen ? icon_workspace_occupied : icon_workspace_occupied_diff_disp) : icon_workspace_empty}")))))))
