@@ -27,7 +27,7 @@
        :space-evenly false
        :spacing "0"
 
-    (box :visible "${screen == 1 || screens == 1}" (volume))
+    (box :visible "${screen == 0 || screens == 1}" (volume))
 
     (box :visible "${screen == 0 || screens == 1}" (metric-cpu))
 
