@@ -32,7 +32,7 @@ window {
 }
 
 .time {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .clock {
@@ -64,7 +64,7 @@ window {
   }
 
   .metric-icon {
-    font-size: 12px;
+    font-size: 10px;
   }
 }
 
@@ -103,9 +103,4 @@ tooltip,
   background-color: $color_base;
   border-radius: 4px;
   text-shadow: none;
-}
-
-calendar:selected {
-  color: $color_lavender;
-  font-weight: bold;
 }
